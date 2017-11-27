@@ -232,7 +232,7 @@ function isDOMElement(element) {
  * @return {Boolean} whether or not the platform is React native
  */
 function isReactNative() {
-  return navigator.product === 'ReactNative'
+  return navigator != null && navigator.product === 'ReactNative'
 }
 
 /**
