@@ -14,6 +14,7 @@ import {
   getA11yStatusMessage,
   unwrapArray,
   isDOMElement,
+  isReactNative,
   getElementProps,
   noop,
   requiredProp,
@@ -614,14 +615,7 @@ class Downshift extends Component {
       rest.id,
       generateId('downshift-input'),
     )
-    // the boolean cast here is necessary due to a weird deal with
-    // babel-plugin-istanbul + preval.macro. No idea...
-    const isPreact = Boolean(
-      preval`module.exports = process.env.BUILD_PREACT === 'true'`,
-    )
-    const onChangeKey = isPreact /* istanbul ignore next (preact) */
-      ? 'onInput'
-      : 'onChange'
+    const onChangeKey = this.input_getOnChangeKey()
     const {inputValue, isOpen, highlightedIndex} = this.getState()
     const eventHandlers = rest.disabled
       ? {}
@@ -651,6 +645,21 @@ class Downshift extends Component {
     }
   }
 
+  input_getOnChangeKey() {
+    // the boolean cast here is necessary due to a weird deal with
+    // babel-plugin-istanbul + preval.macro. No idea...
+    const isPreact = Boolean(
+      preval`module.exports = process.env.BUILD_PREACT === 'true'`,
+    )
+    if (isPreact) {
+      return 'onInput'
+    } else if (isReactNative()) {
+      return 'onChangeText'
+    } else {
+      return 'onChange'
+    }
+  }
+
   input_handleKeyDown = event => {
     if (event.key && this.keyDownHandlers[event.key]) {
       this.keyDownHandlers[event.key].call(this, event)
@@ -661,7 +670,7 @@ class Downshift extends Component {
     this.internalSetState({
       type: Downshift.stateChangeTypes.changeInput,
       isOpen: true,
-      inputValue: event.target.value,
+      inputValue: isReactNative() ? event : event.target.value,
     })
   }
 
@@ -763,7 +772,10 @@ class Downshift extends Component {
       ...state,
     })
     this.previousResultCount = resultCount
-    setA11yStatus(status)
+    // TODO: make this work.
+    if (!isReactNative()) {
+      setA11yStatus(status)
+    }
   }, 200)
 
   componentDidMount() {
