@@ -701,6 +701,8 @@ class Downshift extends Component {
     } else {
       this.items[index] = item
     }
+
+    const onSelectKey = isReactNative() ? 'onPress' : 'onClick'
     return {
       id: this.getItemId(index),
       onMouseEnter: composeEventHandlers(onMouseEnter, () => {
@@ -708,7 +710,7 @@ class Downshift extends Component {
           type: Downshift.stateChangeTypes.itemMouseEnter,
         })
       }),
-      onClick: composeEventHandlers(onClick, () => {
+      [onSelectKey]: composeEventHandlers(onClick, () => {
         this.selectItemAtIndex(index)
       }),
       ...rest,
