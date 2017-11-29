@@ -219,7 +219,6 @@ class Downshift extends Component {
     otherStateToSet = {},
   ) => {
     otherStateToSet = pickState(otherStateToSet)
-    // TODO: this whole method is DOM specific...
     if (!isReactNative) {
       this.internalSetState(
         {highlightedIndex, ...otherStateToSet},
@@ -787,7 +786,6 @@ class Downshift extends Component {
       ...state,
     })
     this.previousResultCount = resultCount
-    // TODO: make this work.
     if (!isReactNative) {
       setA11yStatus(status)
     }
