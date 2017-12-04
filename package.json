@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "A set of primitives to build simple, flexible, WAI-ARIA compliant React autocomplete components",
+  "description": "⚠️ React Native WIP fork! ⚠️",
   "main": "dist/downshift.cjs.js",
   "jsnext:main": "dist/downshift.esm.js",
   "module": "dist/downshift.esm.js",
@@ -88,11 +88,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/paypal/downshift.git"
+    "url": "https://github.com/eliperkins/downshift.git"
   },
   "bugs": {
-    "url": "https://github.com/paypal/downshift/issues"
+    "url": "https://github.com/eliperkins/downshift/issues"
   },
-  "homepage": "https://github.com/paypal/downshift#readme",
+  "homepage": "https://github.com/eliperkins/downshift#readme",
   "dependencies": {}
 }
