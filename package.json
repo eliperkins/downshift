@@ -1,6 +1,9 @@
 {
-  "name": "downshift",
-  "version": "0.0.0-semantically-released",
+  "name": "@eliperkins/downshift",
+  "version": "1.22.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A set of primitives to build simple, flexible, WAI-ARIA compliant React autocomplete components",
   "main": "dist/downshift.cjs.js",
   "jsnext:main": "dist/downshift.esm.js",
